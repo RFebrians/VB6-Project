@@ -15,9 +15,9 @@ Deadline 6 June
 
 ## Member
 ```
-- Riani K
+- Riani 
 - Dimas
 - Purnomo
 - Heri
-- Rizki F
+- Rizki 
 ```
