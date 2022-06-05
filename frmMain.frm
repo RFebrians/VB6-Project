@@ -25,7 +25,7 @@ Begin VB.Form frmMain
       Left            =   600
       TabIndex        =   12
       Top             =   1800
-      Width           =   4000
+      Width           =   3495
       Begin VB.CommandButton cmdGo 
          Caption         =   "&Go"
          Default         =   -1  'True
@@ -129,7 +129,6 @@ Begin VB.Form frmMain
       End
       Begin VB.TextBox txtTitle
          Alignment       =   2  'Center
-         Caption         =   "Judul"
          Height          =   285
          Left            =   120
          TabIndex        =   0
@@ -216,7 +215,7 @@ Private Sub Form_Load()
     cmdClear.Enabled = False
     cmdCancel.Enabled = False
     cmdCancel.Visible = False
-    txtTitle.Text = "Title"
+    txtTitle.Text = ""
     txtTitle.Locked = True
     txtSerial.Text = ""
     txtSerial.Locked = True
@@ -429,7 +428,7 @@ Private Sub mnuTNew_Click()
     cmdLast.Enabled = False
     cmdFirst.Enabled = False
     cmdBack.Enabled = False
-    txtTitle.Text = "Title"
+    txtTitle.Text = ""
     txtTitle.Locked = False
     txtSerial.Text = ""
     txtSerial.Locked = False
