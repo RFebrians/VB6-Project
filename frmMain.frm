@@ -194,8 +194,9 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 '--------------------------------------------------------------
-' Declare all global variables here.  Also, to make sure each
-' variable is declared, set the Option Explicit.
+' Deklarasi semua variable menggunakan 
+' statement Option Explicit
+' Bekerja mirip seperti import .
 '--------------------------------------------------------------
 Option Explicit
     Dim db As Database
@@ -205,9 +206,8 @@ Option Explicit
 
 Private Sub Form_Load()
     '--------------------------------------------------------------
-    ' Sets up the Database and Recordset objects.  Also sets the
-    ' program's state to View mode and populates the text boxes
-    ' with the first record in the database.
+    ' Setup Database dan Object , 
+    ' serta penggunaan dan memuat database itu sendiri
     '--------------------------------------------------------------
     Set db = OpenDatabase(App.Path & "\data.mdb")
     Set rs = db.OpenRecordset("tblSoftware", dbOpenDynaset)
@@ -228,10 +228,8 @@ End Sub
 
 Private Sub cmdSave_Click()
     '--------------------------------------------------------------
-    ' Saves the new or edited record to the database.  The DoWhat
-    ' variable is used to determine if the database edit will be an
-    ' Update statement or an Add statement.  It also resets the
-    ' program's state to View Mode.
+    ' Interaksi CRUD (Create Read Update Delete)
+    ' DoWhat akan menyatakan sebuah kondisi jika terdapat perubahan
     '--------------------------------------------------------------
     cmdSave.Enabled = False
     cmdClear.Enabled = False
@@ -262,8 +260,7 @@ End Sub
 
 Private Sub cmdClear_Click()
     '--------------------------------------------------------------
-    ' Depending on the DoWhat variable, it either clears the text
-    ' boxes (New Entry) or resets the data (Edit Entry)
+    ' Digunakan untuk menghapus teks
     '--------------------------------------------------------------
     cmdGo.Enabled = False
     cmdFirst.Enabled = False
@@ -282,8 +279,8 @@ End Sub
     
 Private Sub cmdCancel_Click()
     '--------------------------------------------------------------
-    ' Only visible in Editing Mode.  It cancels the edit and
-    ' returns the program to the View Mode.
+    ' Mode batal saat Editing mode berlangsung 
+    ' ini akan memuat ke View Mode
     '--------------------------------------------------------------
     cmdGo.Visible = True
     cmdGo.Enabled = True
@@ -296,7 +293,7 @@ End Sub
 
 Private Sub cmdBack_Click()
     '--------------------------------------------------------------
-    ' Procedes to the previous record and displays it.
+    ' Memuat halaman sebelumnya (bagian dari route dan navigasi)
     '--------------------------------------------------------------
     rs.MovePrevious
     If rs.BOF = True Then rs.MoveFirst
@@ -305,7 +302,7 @@ End Sub
 
 Private Sub cmdFirst_Click()
     '--------------------------------------------------------------
-    ' Procedes to the first record and displays it.
+    ' Memuat interaksi database ke baris pertama (Forward)
     '--------------------------------------------------------------
     rs.MoveFirst
     GetData
@@ -313,7 +310,7 @@ End Sub
 
 Private Sub cmdLast_Click()
     '--------------------------------------------------------------
-    ' Procedes to the last record and displays it.
+    ' Memuat interaksi database langsung ke baris terakhir
     '--------------------------------------------------------------
     rs.MoveLast
     GetData
@@ -321,7 +318,7 @@ End Sub
 
 Private Sub cmdNext_Click()
     '--------------------------------------------------------------
-    ' Procedes to the next record and displays it.
+    ' Memuat interaksi Database ke baris selanjutnya (Next)
     '--------------------------------------------------------------
     rs.MoveNext
     If rs.EOF = True Then rs.MoveLast
@@ -330,11 +327,11 @@ End Sub
 
 Private Sub cmdGo_Click()
     '--------------------------------------------------------------
-    ' This function checks the input for being an integer and
-    ' non-empty.  If both conditions are met, it checks to see that
-    ' the user-inputed number is located in the database.  If so,
-    ' it displayes the given record.  If not, it displays either
-    ' the first or last record depending on the number inputed.
+    ' Function yang berinteraksi dengan database ,
+    ' yang digunakan untuk mencari rekaman melalui conditional
+    ' Input yang digunakan adalah integer dan string
+    ' Jika kedua kondisi terpenuhi  , akan ditampilkan rekaman
+    ' jika tidak akan dimuat sesuai dengan int/string yang ada
     '--------------------------------------------------------------
     Dim Record As Integer
     If txtGo.Text = "" Then
@@ -357,7 +354,7 @@ End Sub
 
 Private Sub mnuFOpen_Click()
     '--------------------------------------------------------------
-    ' Displays the common dialog box to open a new database.
+    ' Memuat dialog box yang berinteraksi database ketika diclick
     '--------------------------------------------------------------
     With dlgOpen
         .DialogTitle = "Open Database"
@@ -376,7 +373,7 @@ End Sub
 
 Private Sub mnuFExit_Click()
     '--------------------------------------------------------------
-    ' Exits the program
+    ' Program diakhiri
     '--------------------------------------------------------------
     Unload Me
     End
@@ -384,8 +381,7 @@ End Sub
 
 Private Sub mnuTDelete_Click()
     '--------------------------------------------------------------
-    ' First, it verifies that the user wants to delete the record
-    ' and based on the Yes/No answer, it deletes the record.
+    ' Verifikasi apakah ingin mendelete database ini ?
     '--------------------------------------------------------------
     Dim Answer As Integer
     Answer = MsgBox("Are you sure you want to delete this record?", vbQuestion + vbYesNo, "Verify Deletion of Record")
@@ -400,11 +396,8 @@ End Sub
 
 Private Sub mnuTEdit_Click()
     '--------------------------------------------------------------
-    ' All this does is clear the text boxes, enables them for
-    ' editing, forces the navigation buttons to be disabled and
-    ' enables the editing buttons (Save, Clear, Cancel)
-    ' It also sets the "DoWhat" setting, used when saving/updating
-    ' the database.
+    ' mnuTEdit digunakan untuk mengedit text box
+    ' fitur ini berinteraksi dengan DoWhat untuk editing rekaman
     '--------------------------------------------------------------
     cmdSave.Enabled = True
     cmdClear.Enabled = True
@@ -424,11 +417,9 @@ End Sub
 
 Private Sub mnuTNew_Click()
     '--------------------------------------------------------------
-    ' All this does is clear the text boxes, enables them for
-    ' editing, forces the navigation buttons to be disabled and
-    ' enables the editing buttons (Save, Clear, Cancel)
-    ' It also sets the "DoWhat" setting, used when saving/updating
-    ' the database.
+    ' mnuTNew_Click akan membuat text box menjadi kosong
+    ' fitur ini digunakan untuk (Save , Clear , Cancel)
+    ' yang berinteraksi dengan DoWhat 
     '--------------------------------------------------------------
     cmdSave.Enabled = True
     cmdClear.Enabled = True
@@ -451,15 +442,14 @@ End Sub
 
 Private Sub mnuTPrint_Click()
     '--------------------------------------------------------------
-    ' Displays the Report of all the software information in the
-    ' database and displays it in a standard Access report format.
+    ' Menampilkan database pada MS Access
     '--------------------------------------------------------------
     rptSoftware.Show
 End Sub
 
 Private Sub mnuHAbout_Click()
     '--------------------------------------------------------------
-    ' Displayes a simple "about box" in the form of a message box.
+    ' Menampilkan nama-nama pembuat program pada about box
     '--------------------------------------------------------------
     Dim Line1, Title
 Line1 = "Software Inventory : Riani , Dimas , Purnomo , Heri , Rizki "
@@ -469,9 +459,8 @@ End Sub
 
 Private Sub mnuHHelp_Click()
     '--------------------------------------------------------------
-    ' Not implimented.  I haven't written the help file yet.
-    ' However I do know this code works, as I use it in another
-    ' working application.
+    ' Code penyanggah jika terdapat error .
+    ' Note : Belum di implementasi
     '--------------------------------------------------------------
     Dim nRun
     nRun = Shell("hh.exe " & App.Path & "\help.chm", vbMaximizedFocus)
@@ -479,7 +468,7 @@ End Sub
 
 Public Function GetData()
     '--------------------------------------------------------------
-    ' This is responsible for reading the data out of the database.
+    ' Function ini digunakan untuk membaca/memuat database
     '--------------------------------------------------------------
     fraRecord.Caption = "Record:" & rs.Fields("ID")
     txtTitle.Text = rs.Fields("Title")
@@ -489,8 +478,7 @@ End Function
 
 Public Function GetNumRows()
     '--------------------------------------------------------------
-    ' All this function does is count the number of rows in the
-    ' database.
+    ' Function dibawah ini menyatakan jumlah baris pada Database
     '--------------------------------------------------------------
     NumRows = 0
     rs.MoveFirst
