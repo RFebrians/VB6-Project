@@ -462,7 +462,7 @@ Private Sub mnuHAbout_Click()
     ' Displayes a simple "about box" in the form of a message box.
     '--------------------------------------------------------------
     Dim Line1, Title
-    Line1 = "Software Inventory\n Rizki F "
+Line1 = "Software Inventory : Riani , Dimas , Purnomo , Heri , Rizki "
     Title = "About Software Inventory"
     MsgBox Line1, vbInformation + vbOKOnly, Title
 End Sub
