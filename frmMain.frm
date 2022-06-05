@@ -9,7 +9,7 @@ Begin VB.Form frmMain
    ClientWidth     =   4695
    Icon            =   "frmMain.frx":0000
    LinkTopic       =   "Form1"
-   MaxButton       =   0   'False
+   MaxButton       =   1   'True
    ScaleHeight     =   2895
    ScaleWidth      =   4695
    StartUpPosition =   2  'CenterScreen
@@ -25,7 +25,7 @@ Begin VB.Form frmMain
       Left            =   600
       TabIndex        =   12
       Top             =   1800
-      Width           =   3495
+      Width           =   4000
       Begin VB.CommandButton cmdGo 
          Caption         =   "&Go"
          Default         =   -1  'True
@@ -127,8 +127,9 @@ Begin VB.Form frmMain
          Top             =   720
          Width           =   4215
       End
-      Begin VB.TextBox txtTitle 
+      Begin VB.TextBox txtTitle
          Alignment       =   2  'Center
+         Caption         =   "Judul"
          Height          =   285
          Left            =   120
          TabIndex        =   0
@@ -215,7 +216,7 @@ Private Sub Form_Load()
     cmdClear.Enabled = False
     cmdCancel.Enabled = False
     cmdCancel.Visible = False
-    txtTitle.Text = ""
+    txtTitle.Text = "Title"
     txtTitle.Locked = True
     txtSerial.Text = ""
     txtSerial.Locked = True
@@ -335,10 +336,10 @@ Private Sub cmdGo_Click()
     '--------------------------------------------------------------
     Dim Record As Integer
     If txtGo.Text = "" Then
-        MsgBox "Enter an integer only", vbCritical + vbOKOnly, "Error with Input"
+        MsgBox "Pergi ke Halaman", vbCritical + vbOKOnly, "Error with Input"
     Else
         If IsNumeric(txtGo.Text) = False Then
-            MsgBox "Enter an integer only", vbCritical + vbOKOnly, "Error with Input"
+            MsgBox "Masukan Rekaman Halaman yang dituju", vbCritical + vbOKOnly, "Error with Input"
         Else
             GetNumRows
             Record = txtGo.Text - 1
@@ -384,7 +385,7 @@ Private Sub mnuTDelete_Click()
     ' Verifikasi apakah ingin mendelete database ini ?
     '--------------------------------------------------------------
     Dim Answer As Integer
-    Answer = MsgBox("Are you sure you want to delete this record?", vbQuestion + vbYesNo, "Verify Deletion of Record")
+    Answer = MsgBox("Apakah anda ingin menghapus rekaman ini ?", vbQuestion + vbYesNo, "Hapus rekaman ?")
     If Answer = 6 Then
         rs.Delete
         rs.MoveLast
@@ -428,7 +429,7 @@ Private Sub mnuTNew_Click()
     cmdLast.Enabled = False
     cmdFirst.Enabled = False
     cmdBack.Enabled = False
-    txtTitle.Text = ""
+    txtTitle.Text = "Title"
     txtTitle.Locked = False
     txtSerial.Text = ""
     txtSerial.Locked = False
