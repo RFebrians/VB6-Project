@@ -1,3 +1,3 @@
-Line 132: The property name Caption in txtTitle is invalid.
-Line 132: The property name Caption in txtTitle is invalid.
-Line 132: The property name Caption in txtTitle is invalid.
+Line 114: Did not find an index property and control fraRecord already exists.
+Line 146: Cannot load control mnuFile; containing control not a valid container.
+Line 146: The file H:\Visual Basic\VB6-Project\frmMain.frm could not be loaded.
